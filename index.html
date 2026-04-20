@@ -1,125 +1,601 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>I Love You | Landing</title>
-
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Custom Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bloom & Bliss Spa — A Love Letter for You 💖</title>
+<meta name="description" content="A romantic, surprise-filled spa experience crafted with love. Games, gifts, hearts and pampering — all for you." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Dancing+Script:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          serif: ['"Cormorant Garamond"', 'serif'],
+          script: ['"Dancing Script"', 'cursive'],
+          sans: ['Poppins', 'sans-serif'],
+        },
+        colors: {
+          rose: {
+            cream: '#fff7f3',
+            blush: '#ffd6e0',
+            petal: '#ffb3c6',
+            wine: '#8b1e3f',
+            deep: '#5b1530',
+          },
+          gold: '#d4a373',
+          champagne: '#f6e7d7',
+        },
+        keyframes: {
+          floatUp: { '0%':{transform:'translateY(100vh) scale(.6)',opacity:'0'}, '10%':{opacity:'1'}, '100%':{transform:'translateY(-10vh) scale(1.2)',opacity:'0'} },
+          beat: { '0%,100%':{transform:'scale(1)'}, '25%':{transform:'scale(1.18)'}, '50%':{transform:'scale(.95)'}, '75%':{transform:'scale(1.12)'} },
+          shimmer: { '0%':{backgroundPosition:'-200% 0'}, '100%':{backgroundPosition:'200% 0'} },
+          fadeUp: { '0%':{opacity:'0',transform:'translateY(30px)'}, '100%':{opacity:'1',transform:'translateY(0)'} },
+          spinSlow: { 'to':{transform:'rotate(360deg)'} },
+          wiggle: { '0%,100%':{transform:'rotate(-3deg)'}, '50%':{transform:'rotate(3deg)'} },
+          glow: { '0%,100%':{boxShadow:'0 0 30px rgba(255,105,135,.4)'}, '50%':{boxShadow:'0 0 60px rgba(255,105,135,.8)'} },
+          popIn: { '0%':{transform:'scale(0) rotate(-20deg)',opacity:'0'}, '70%':{transform:'scale(1.1) rotate(5deg)'}, '100%':{transform:'scale(1) rotate(0)',opacity:'1'} },
+          float: { '0%,100%':{transform:'translateY(0)'}, '50%':{transform:'translateY(-15px)'} },
+        },
+        animation: {
+          floatUp: 'floatUp linear infinite',
+          beat: 'beat 1.2s ease-in-out infinite',
+          shimmer: 'shimmer 3s linear infinite',
+          fadeUp: 'fadeUp .8s ease-out forwards',
+          spinSlow: 'spinSlow 20s linear infinite',
+          wiggle: 'wiggle 1s ease-in-out infinite',
+          glow: 'glow 2s ease-in-out infinite',
+          popIn: 'popIn .6s cubic-bezier(.34,1.56,.64,1) forwards',
+          float: 'float 4s ease-in-out infinite',
+        }
+      }
     }
-  </style>
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background:
+      radial-gradient(circle at 20% 10%, #ffe4ec 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, #ffd6e0 0%, transparent 50%),
+      linear-gradient(135deg, #fff7f3 0%, #ffeaf0 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .shimmer-text {
+    background: linear-gradient(90deg, #8b1e3f 0%, #d4a373 25%, #ff6f91 50%, #d4a373 75%, #8b1e3f 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 4s linear infinite;
+  }
+  .glass {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.6);
+  }
+  .heart-cursor { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'><path fill='%23ff4d6d' d='M12 21s-7-4.5-9.5-9C.5 8 2.5 4 6.5 4c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 4 0 6 4 4 8-2.5 4.5-9.5 9-9.5 9z'/></svg>") 14 14, pointer; }
+  .petal {
+    position: fixed;
+    pointer-events: none;
+    font-size: 22px;
+    z-index: 5;
+    animation: floatUp linear infinite;
+  }
+  .heart-burst {
+    position: fixed;
+    pointer-events: none;
+    font-size: 28px;
+    z-index: 60;
+    animation: popIn .8s ease-out, fadeUp 1.5s ease-out forwards;
+  }
+  .ornate-divider {
+    background: linear-gradient(90deg, transparent, #d4a373, transparent);
+    height: 1px;
+  }
+  .card-hover { transition: all .5s cubic-bezier(.34,1.56,.64,1); }
+  .card-hover:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 25px 50px -12px rgba(139, 30, 63, 0.35); }
+  .btn-romantic {
+    background: linear-gradient(135deg, #ff6f91 0%, #8b1e3f 100%);
+    background-size: 200% 200%;
+    transition: all .4s ease;
+  }
+  .btn-romantic:hover { background-position: right center; transform: translateY(-2px); box-shadow: 0 15px 30px -10px rgba(139, 30, 63, .5); }
+  /* Memory Game */
+  .mem-card { perspective: 1000px; aspect-ratio: 1; }
+  .mem-inner { position: relative; width: 100%; height: 100%; transition: transform .6s; transform-style: preserve-3d; cursor: pointer; }
+  .mem-card.flipped .mem-inner, .mem-card.matched .mem-inner { transform: rotateY(180deg); }
+  .mem-front, .mem-back { position: absolute; inset: 0; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; border-radius: 1rem; font-size: clamp(1.5rem, 5vw, 2.5rem); }
+  .mem-front { background: linear-gradient(135deg, #8b1e3f, #ff6f91); color: #fff7f3; box-shadow: 0 8px 20px rgba(139,30,63,.3); }
+  .mem-front::after { content: '💝'; }
+  .mem-back { background: linear-gradient(135deg, #fff7f3, #ffd6e0); transform: rotateY(180deg); box-shadow: 0 8px 20px rgba(255,111,145,.3); }
+  .mem-card.matched .mem-back { animation: beat 1s ease-in-out 2; }
+  /* Scratch reveal */
+  .scratch-wrap { position: relative; aspect-ratio: 16/9; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 20px 40px -15px rgba(139,30,63,.4); }
+  #scratchCanvas { position: absolute; inset: 0; cursor: grab; touch-action: none; }
+  /* Modal */
+  .modal-backdrop { background: rgba(91, 21, 48, 0.6); backdrop-filter: blur(8px); }
+  /* Marquee */
+  .marquee { display: flex; gap: 3rem; animation: scroll 30s linear infinite; white-space: nowrap; }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(40px); transition: all .9s cubic-bezier(.34,1.56,.64,1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  /* GIF wrapper */
+  .gif-frame { border: 6px solid #fff; box-shadow: 0 20px 40px -10px rgba(139,30,63,.3); border-radius: 1.5rem; overflow: hidden; }
+  /* Loader heart */
+  .loader-heart { width: 80px; height: 80px; }
+</style>
 </head>
+<body class="text-rose-deep heart-cursor">
 
-<body class="bg-gradient-to-br from-pink-100 via-white to-purple-100 text-gray-800">
+<!-- WELCOME OVERLAY -->
+<div id="welcome" class="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-rose-cream via-rose-blush to-rose-petal">
+  <div class="text-center px-6 animate-fadeUp">
+    <div class="text-7xl md:text-9xl mb-4 animate-beat inline-block">💖</div>
+    <h1 class="font-script text-5xl md:text-7xl text-rose-deep mb-4">Hello, Beautiful…</h1>
+    <p class="font-serif text-xl md:text-2xl text-rose-wine mb-2 italic">A little something I made,</p>
+    <p class="font-serif text-xl md:text-2xl text-rose-wine mb-8 italic">just for you. 🌹</p>
+    <button onclick="enter()" class="btn-romantic text-rose-cream font-medium px-10 py-4 rounded-full text-lg tracking-wide animate-glow">
+      Open Your Surprise ✨
+    </button>
+  </div>
+</div>
 
-  <!-- Navbar -->
-  <header class="fixed w-full bg-white/80 backdrop-blur-md shadow-sm z-50">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-      <h1 class="text-xl font-bold text-pink-600">Love<span class="text-purple-600">UI</span></h1>
-      <nav class="space-x-6 hidden md:flex">
-        <a href="#home" class="hover:text-pink-500">Home</a>
-        <a href="#about" class="hover:text-pink-500">About</a>
-        <a href="#features" class="hover:text-pink-500">Feature</a>
-        <a href="#contact" class="hover:text-pink-500">Contact</a>
-      </nav>
+<!-- NAV -->
+<nav class="sticky top-0 z-40 glass">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2">
+      <span class="text-2xl animate-beat">🌸</span>
+      <span class="font-script text-2xl text-rose-deep">Bloom &amp; Bliss</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 font-medium text-rose-wine">
+      <a href="#services" class="hover:text-rose-deep transition">Services</a>
+      <a href="#game" class="hover:text-rose-deep transition">Love Game</a>
+      <a href="#gift" class="hover:text-rose-deep transition">Scratch Gift</a>
+      <a href="#book" class="hover:text-rose-deep transition">Book</a>
     </div>
-  </header>
+    <button onclick="openLove()" class="btn-romantic text-rose-cream px-5 py-2 rounded-full text-sm font-medium">💌 Note for You</button>
+  </div>
+</nav>
 
-  <!-- Hero Section -->
-  <section id="home" class="min-h-screen flex items-center justify-center text-center px-6">
-    <div>
-      <h2 class="text-4xl md:text-6xl font-bold text-pink-600 mb-6">
-        I Love You ❤️
-      </h2>
-      <p class="text-lg md:text-xl text-gray-600 max-w-xl mx-auto mb-8">
-        A simple, beautiful way to express your feelings through modern design and elegant UI.
+<!-- HERO -->
+<section id="top" class="relative max-w-7xl mx-auto px-6 pt-12 pb-20 md:pt-20 md:pb-32">
+  <div class="grid md:grid-cols-2 gap-12 items-center">
+    <div class="reveal">
+      <span class="inline-block px-4 py-1 rounded-full bg-rose-blush text-rose-deep font-medium text-sm mb-6">✨ Made with endless love ✨</span>
+      <h1 class="font-serif text-5xl md:text-7xl leading-tight mb-6">
+        <span class="shimmer-text">A Spa Day,</span><br/>
+        <span class="font-script text-rose-deep text-6xl md:text-8xl">just for her.</span>
+      </h1>
+      <p class="text-lg md:text-xl text-rose-wine/80 mb-8 leading-relaxed">
+        Soft petals, warm candles, golden light — and a whole lot of love woven into every moment. This is your place to glow, rest, and feel adored. 🌷
       </p>
-      <button class="px-8 py-3 bg-pink-500 text-white rounded-full shadow-lg hover:bg-pink-600 transition">
-        Get Started
-      </button>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="py-20 bg-white">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <h3 class="text-3xl font-semibold mb-6 text-purple-600">About</h3>
-      <p class="text-gray-600 max-w-2xl mx-auto">
-        This is a modern responsive single-page application built using Tailwind CSS.
-        It demonstrates clean UI design, responsiveness, and professional structure — perfect for real-world projects.
-      </p>
-    </div>
-  </section>
-
-  <!-- Features -->
-  <section id="features" class="py-20 bg-gradient-to-r from-pink-50 to-purple-50">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <h3 class="text-3xl font-semibold mb-12 text-pink-600">Features</h3>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-          <h4 class="font-semibold text-lg mb-2">Responsive</h4>
-          <p class="text-gray-600">Looks perfect on mobile, tablet, and desktop.</p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#services" class="btn-romantic text-rose-cream px-8 py-4 rounded-full font-medium">Explore Treatments 💆‍♀️</a>
+        <a href="#game" class="bg-white/70 border border-rose-petal text-rose-deep px-8 py-4 rounded-full font-medium hover:bg-white transition">Play Love Game 💝</a>
+      </div>
+      <div class="flex items-center gap-6 mt-10">
+        <div class="flex -space-x-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-rose-petal to-rose-wine border-2 border-white flex items-center justify-center text-white">💗</div>
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold to-rose-petal border-2 border-white flex items-center justify-center text-white">🌸</div>
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-rose-wine to-rose-deep border-2 border-white flex items-center justify-center text-white">💖</div>
         </div>
-
-        <div class="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-          <h4 class="font-semibold text-lg mb-2">Modern UI</h4>
-          <p class="text-gray-600">Clean and elegant Tailwind-based design.</p>
-        </div>
-
-        <div class="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-          <h4 class="font-semibold text-lg mb-2">Easy to Customize</h4>
-          <p class="text-gray-600">Modify sections easily for your own projects.</p>
+        <div>
+          <div class="text-rose-deep font-semibold">∞ / 5 stars</div>
+          <div class="text-sm text-rose-wine/70">Loved by the only one who matters — you.</div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- CTA -->
-  <section class="py-20 text-center">
-    <h3 class="text-3xl font-bold text-purple-600 mb-4">Make Someone Smile 😊</h3>
-    <p class="text-gray-600 mb-6">Sometimes, a simple “I Love You” is enough.</p>
-    <button class="px-8 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transition">
-      Share Love
-    </button>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="py-20 bg-white">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <h3 class="text-3xl font-semibold mb-6 text-pink-600">Contact</h3>
-
-      <form class="space-y-4">
-        <input type="text" placeholder="Your Name"
-          class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"/>
-
-        <input type="email" placeholder="Your Email"
-          class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"/>
-
-        <textarea placeholder="Your Message"
-          class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"></textarea>
-
-        <button class="px-6 py-3 bg-pink-500 text-white rounded-lg hover:bg-pink-600">
-          Send Message
-        </button>
-      </form>
+    <div class="relative reveal">
+      <div class="absolute -top-8 -right-8 w-72 h-72 bg-rose-petal/40 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-8 -left-8 w-72 h-72 bg-gold/30 rounded-full blur-3xl"></div>
+      <div class="relative gif-frame animate-float">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2I5d2hxNXJtYmh3YWJ4ZG93dXJ4cGo4dWcwbDE3eGdkcjQ4d2lzaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKsQ8gEQwQF1WGs/giphy.gif" alt="Relaxing spa scene" class="w-full h-[420px] object-cover" onerror="this.src='https://media.giphy.com/media/3o6Mb9wVnRb4QKAkSk/giphy.gif'"/>
+        <div class="absolute top-4 left-4 glass rounded-2xl px-4 py-2 text-sm font-medium text-rose-deep">🕯️ Candles lit just for you</div>
+        <div class="absolute bottom-4 right-4 glass rounded-2xl px-4 py-2 text-sm font-medium text-rose-deep animate-wiggle">🌹 Forever yours</div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer class="py-6 text-center bg-gray-100">
-    <p class="text-gray-500 text-sm">
-      © 2026 LoveUI. Built with ❤️ using Tailwind CSS.
-    </p>
-  </footer>
+<!-- MARQUEE -->
+<div class="bg-rose-deep text-rose-cream py-5 overflow-hidden">
+  <div class="marquee font-script text-3xl">
+    <span>💖 You are my favourite</span><span>🌸 Soft heart, soft skin</span><span>💆‍♀️ Pause. Breathe. You're loved.</span><span>🌷 Petal by petal, I adore you</span><span>✨ Glow because you're mine</span>
+    <span>💖 You are my favourite</span><span>🌸 Soft heart, soft skin</span><span>💆‍♀️ Pause. Breathe. You're loved.</span><span>🌷 Petal by petal, I adore you</span><span>✨ Glow because you're mine</span>
+  </div>
+</div>
 
+<!-- SERVICES -->
+<section id="services" class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+  <div class="text-center mb-16 reveal">
+    <p class="font-script text-3xl text-rose-petal mb-2">— our treatments —</p>
+    <h2 class="font-serif text-4xl md:text-6xl text-rose-deep">Pampering, Petal-Soft.</h2>
+    <div class="ornate-divider w-40 mx-auto mt-6"></div>
+  </div>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- card -->
+    <div class="card-hover glass rounded-3xl p-8 reveal">
+      <div class="text-5xl mb-4 animate-float">🌹</div>
+      <h3 class="font-serif text-2xl text-rose-deep mb-2">Rose Petal Bath</h3>
+      <p class="text-rose-wine/80 mb-4">A warm soak among fresh roses, soft music, and whispers of how loved you are.</p>
+      <div class="flex justify-between items-center">
+        <span class="font-script text-2xl text-rose-petal">∞ kisses</span>
+        <button onclick="bookService('Rose Petal Bath')" class="text-rose-deep font-medium hover:underline">Book →</button>
+      </div>
+    </div>
+
+    <div class="card-hover glass rounded-3xl p-8 reveal">
+      <div class="text-5xl mb-4 animate-float" style="animation-delay:.5s">🍯</div>
+      <h3 class="font-serif text-2xl text-rose-deep mb-2">Honey &amp; Gold Facial</h3>
+      <p class="text-rose-wine/80 mb-4">For the face I would memorize a thousand times. Glow as bright as your smile.</p>
+      <div class="flex justify-between items-center">
+        <span class="font-script text-2xl text-rose-petal">all my love</span>
+        <button onclick="bookService('Honey & Gold Facial')" class="text-rose-deep font-medium hover:underline">Book →</button>
+      </div>
+    </div>
+
+    <div class="card-hover glass rounded-3xl p-8 reveal">
+      <div class="text-5xl mb-4 animate-float" style="animation-delay:1s">💆‍♀️</div>
+      <h3 class="font-serif text-2xl text-rose-deep mb-2">Forever Yours Massage</h3>
+      <p class="text-rose-wine/80 mb-4">Warm oils, slow hands, and the kind of comfort that says "I've got you, always."</p>
+      <div class="flex justify-between items-center">
+        <span class="font-script text-2xl text-rose-petal">free, for you</span>
+        <button onclick="bookService('Forever Yours Massage')" class="text-rose-deep font-medium hover:underline">Book →</button>
+      </div>
+    </div>
+
+    <div class="card-hover glass rounded-3xl p-8 reveal">
+      <div class="text-5xl mb-4 animate-float" style="animation-delay:1.5s">🛁</div>
+      <h3 class="font-serif text-2xl text-rose-deep mb-2">Moonlight Aromatherapy</h3>
+      <p class="text-rose-wine/80 mb-4">Lavender, vanilla, and quiet — like the way you make my world calm.</p>
+      <div class="flex justify-between items-center">
+        <span class="font-script text-2xl text-rose-petal">a poem</span>
+        <button onclick="bookService('Moonlight Aromatherapy')" class="text-rose-deep font-medium hover:underline">Book →</button>
+      </div>
+    </div>
+
+    <div class="card-hover glass rounded-3xl p-8 reveal">
+      <div class="text-5xl mb-4 animate-float" style="animation-delay:2s">💅</div>
+      <h3 class="font-serif text-2xl text-rose-deep mb-2">Manicure of the Heart</h3>
+      <p class="text-rose-wine/80 mb-4">For the hands I love to hold. Soft, polished, and perfect — just like you.</p>
+      <div class="flex justify-between items-center">
+        <span class="font-script text-2xl text-rose-petal">a song</span>
+        <button onclick="bookService('Manicure of the Heart')" class="text-rose-deep font-medium hover:underline">Book →</button>
+      </div>
+    </div>
+
+    <div class="card-hover glass rounded-3xl p-8 reveal">
+      <div class="text-5xl mb-4 animate-float" style="animation-delay:2.5s">🌸</div>
+      <h3 class="font-serif text-2xl text-rose-deep mb-2">Cherry Blossom Scrub</h3>
+      <p class="text-rose-wine/80 mb-4">Petal-soft exfoliation for skin that already glows like spring sunlight.</p>
+      <div class="flex justify-between items-center">
+        <span class="font-script text-2xl text-rose-petal">a forever</span>
+        <button onclick="bookService('Cherry Blossom Scrub')" class="text-rose-deep font-medium hover:underline">Book →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GAME: MEMORY -->
+<section id="game" class="bg-gradient-to-br from-rose-blush/40 via-rose-cream to-champagne py-20 md:py-28">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-12 reveal">
+      <p class="font-script text-3xl text-rose-petal mb-2">— a little game —</p>
+      <h2 class="font-serif text-4xl md:text-6xl text-rose-deep">Match the Hearts 💕</h2>
+      <p class="text-rose-wine/80 mt-4 max-w-xl mx-auto">Find every pair to unlock a tiny secret message. (Hint: it's about you.)</p>
+    </div>
+
+    <div class="glass rounded-3xl p-6 md:p-10 reveal">
+      <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
+        <div class="flex items-center gap-4">
+          <div class="bg-rose-deep text-rose-cream px-4 py-2 rounded-full text-sm font-medium">Moves: <span id="moves">0</span></div>
+          <div class="bg-rose-petal text-rose-deep px-4 py-2 rounded-full text-sm font-medium">Pairs: <span id="pairs">0</span>/8</div>
+        </div>
+        <button onclick="initGame()" class="btn-romantic text-rose-cream px-5 py-2 rounded-full text-sm">↻ Restart</button>
+      </div>
+      <div id="board" class="grid grid-cols-4 gap-3 md:gap-4"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCRATCH GIFT -->
+<section id="gift" class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+  <div class="text-center mb-12 reveal">
+    <p class="font-script text-3xl text-rose-petal mb-2">— scratch &amp; reveal —</p>
+    <h2 class="font-serif text-4xl md:text-6xl text-rose-deep">Your Secret Gift 🎁</h2>
+    <p class="text-rose-wine/80 mt-4 max-w-xl mx-auto">Scratch the card with your finger or mouse. Something sweet is waiting.</p>
+  </div>
+
+  <div class="reveal">
+    <div class="scratch-wrap glass">
+      <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-rose-cream to-rose-blush">
+        <div class="text-6xl md:text-7xl mb-4 animate-beat">💝</div>
+        <h3 class="font-script text-4xl md:text-5xl text-rose-deep mb-2">You + Me</h3>
+        <p class="font-serif text-lg md:text-2xl text-rose-wine italic">"Forever, and one extra day — just to be safe."</p>
+        <p class="text-rose-deep mt-4 font-medium">🌹 Coupon: ONE FREE HUG (redeemable anytime)</p>
+      </div>
+      <canvas id="scratchCanvas"></canvas>
+    </div>
+    <p class="text-center text-rose-wine/70 text-sm mt-4">✨ Tip: Use your finger on mobile</p>
+  </div>
+</section>
+
+<!-- LOVE METER -->
+<section class="max-w-4xl mx-auto px-6 pb-20">
+  <div class="glass rounded-3xl p-8 md:p-12 text-center reveal">
+    <h3 class="font-serif text-3xl md:text-4xl text-rose-deep mb-4">Press the Heart 💗</h3>
+    <p class="text-rose-wine/80 mb-8">How much do I love you? Tap to find out.</p>
+    <button onclick="loveTap()" class="text-8xl md:text-9xl animate-beat hover:scale-110 transition-transform">❤️</button>
+    <div class="mt-8">
+      <div class="w-full h-4 bg-rose-blush rounded-full overflow-hidden">
+        <div id="loveBar" class="h-full bg-gradient-to-r from-rose-petal via-rose-wine to-rose-deep transition-all duration-500" style="width:0%"></div>
+      </div>
+      <p id="loveText" class="mt-4 font-script text-2xl text-rose-deep">Tap the heart...</p>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section id="book" class="bg-gradient-to-br from-rose-deep to-rose-wine text-rose-cream py-20 md:py-28">
+  <div class="max-w-3xl mx-auto px-6 text-center">
+    <p class="font-script text-3xl text-rose-petal mb-2">— reserve your moment —</p>
+    <h2 class="font-serif text-4xl md:text-6xl mb-4">Book Your Spa Day</h2>
+    <p class="text-rose-cream/80 mb-10">Choose a time. I'll handle the candles, the music, the petals, and all the love.</p>
+
+    <form onsubmit="submitBook(event)" class="glass rounded-3xl p-6 md:p-10 text-left text-rose-deep grid gap-4 md:grid-cols-2">
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium mb-2">Your beautiful name</label>
+        <input required type="text" class="w-full px-4 py-3 rounded-xl bg-white/70 border border-rose-petal focus:outline-none focus:ring-2 focus:ring-rose-wine"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-2">Date</label>
+        <input required type="date" class="w-full px-4 py-3 rounded-xl bg-white/70 border border-rose-petal focus:outline-none focus:ring-2 focus:ring-rose-wine"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-2">Time</label>
+        <input required type="time" class="w-full px-4 py-3 rounded-xl bg-white/70 border border-rose-petal focus:outline-none focus:ring-2 focus:ring-rose-wine"/>
+      </div>
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium mb-2">Treatment</label>
+        <select id="bookSelect" class="w-full px-4 py-3 rounded-xl bg-white/70 border border-rose-petal focus:outline-none focus:ring-2 focus:ring-rose-wine">
+          <option>Rose Petal Bath</option><option>Honey &amp; Gold Facial</option><option>Forever Yours Massage</option><option>Moonlight Aromatherapy</option><option>Manicure of the Heart</option><option>Cherry Blossom Scrub</option>
+        </select>
+      </div>
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium mb-2">A little note for me 💌</label>
+        <textarea rows="3" class="w-full px-4 py-3 rounded-xl bg-white/70 border border-rose-petal focus:outline-none focus:ring-2 focus:ring-rose-wine" placeholder="anything you want, my love..."></textarea>
+      </div>
+      <button type="submit" class="md:col-span-2 btn-romantic text-rose-cream py-4 rounded-xl font-medium text-lg">Confirm My Spa Day 💖</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-rose-deep text-rose-cream/80 py-10 text-center">
+  <div class="text-3xl mb-3 animate-beat">💖</div>
+  <p class="font-script text-2xl text-rose-cream">Made with all my love</p>
+  <p class="text-sm mt-2">© Bloom &amp; Bliss — for the only one.</p>
+</footer>
+
+<!-- FLOATING LOVE BUTTON -->
+<button onclick="openLove()" class="fixed bottom-6 right-6 z-40 btn-romantic text-rose-cream w-16 h-16 rounded-full shadow-2xl flex items-center justify-center text-2xl animate-glow">
+  💌
+</button>
+
+<!-- MODAL -->
+<div id="modal" class="fixed inset-0 z-[90] hidden items-center justify-center modal-backdrop p-4">
+  <div class="bg-gradient-to-br from-rose-cream to-rose-blush max-w-md w-full rounded-3xl p-8 text-center relative animate-popIn">
+    <button onclick="closeModal()" class="absolute top-4 right-4 text-rose-deep text-2xl hover:rotate-90 transition-transform">×</button>
+    <div id="modalIcon" class="text-7xl mb-4 animate-beat">💖</div>
+    <h3 id="modalTitle" class="font-serif text-3xl text-rose-deep mb-3">Title</h3>
+    <p id="modalText" class="text-rose-wine font-serif text-lg italic mb-6">Message</p>
+    <button onclick="closeModal()" class="btn-romantic text-rose-cream px-8 py-3 rounded-full">Aww, thank you 💕</button>
+  </div>
+</div>
+
+<!-- AUDIO -->
+<audio id="pop" preload="auto" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA="></audio>
+
+<script>
+function enter(){
+  const w = document.getElementById('welcome');
+  w.style.transition = 'opacity .8s, transform .8s';
+  w.style.opacity = '0';
+  w.style.transform = 'scale(1.1)';
+  setTimeout(()=>w.remove(), 800);
+  burstHearts(window.innerWidth/2, window.innerHeight/2, 25);
+  startPetals();
+}
+
+/* Petals rain */
+function startPetals(){
+  const emojis = ['🌸','🌹','💖','🌷','💗','✨','🌺'];
+  setInterval(()=>{
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    p.style.left = Math.random()*100 + 'vw';
+    p.style.animationDuration = (6 + Math.random()*8) + 's';
+    p.style.fontSize = (16 + Math.random()*22) + 'px';
+    p.style.opacity = (.5 + Math.random()*.5);
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(), 14000);
+  }, 400);
+}
+
+/* Heart burst at coords */
+function burstHearts(x,y,n=8){
+  const set = ['💖','💗','💕','💝','🌹','✨'];
+  for(let i=0;i<n;i++){
+    const h = document.createElement('div');
+    h.className = 'heart-burst';
+    h.textContent = set[Math.floor(Math.random()*set.length)];
+    const angle = Math.random()*Math.PI*2;
+    const dist = 60 + Math.random()*120;
+    h.style.left = x + 'px';
+    h.style.top = y + 'px';
+    h.style.transform = `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist}px)`;
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(), 1500);
+  }
+}
+
+document.addEventListener('click', e => {
+  if (e.target.closest('button, a, input, textarea, select, canvas')) return;
+  burstHearts(e.clientX, e.clientY, 4);
+});
+
+/* Reveal on scroll */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* Modal */
+function openModal(icon,title,text){
+  document.getElementById('modalIcon').textContent = icon;
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalText').textContent = text;
+  const m = document.getElementById('modal');
+  m.classList.remove('hidden'); m.classList.add('flex');
+  burstHearts(window.innerWidth/2, window.innerHeight/2, 15);
+}
+function closeModal(){
+  const m = document.getElementById('modal');
+  m.classList.add('hidden'); m.classList.remove('flex');
+}
+function bookService(name){
+  document.getElementById('bookSelect').value = name;
+  openModal('💆‍♀️', name, `"${name}" picked just for you. Scroll down to confirm your spa day, beautiful.`);
+  setTimeout(()=>document.getElementById('book').scrollIntoView({behavior:'smooth'}), 1200);
+}
+function submitBook(e){
+  e.preventDefault();
+  openModal('💖','Booked with love!','Your spa day is reserved. Petals, candles, and all my love — ready and waiting. 🌹');
+  e.target.reset();
+}
+function openLove(){
+  const notes = [
+    ["💌","A tiny note","You make ordinary days feel like poetry."],
+    ["🌹","For you","Even roses are jealous of how you bloom."],
+    ["✨","Real talk","I'd choose you. Over and over. Without a pause."],
+    ["💖","Promise","Your peace is my favourite project."],
+    ["🌸","Truth","You are the softest part of my whole life."],
+  ];
+  const n = notes[Math.floor(Math.random()*notes.length)];
+  openModal(n[0],n[1],n[2]);
+}
+
+/* Memory game */
+const symbols = ['🌹','💖','🌸','✨','🍯','🕯️','💝','🌷'];
+let first=null, lock=false, moves=0, pairs=0;
+function initGame(){
+  const board = document.getElementById('board');
+  board.innerHTML = '';
+  moves=0; pairs=0; first=null; lock=false;
+  document.getElementById('moves').textContent='0';
+  document.getElementById('pairs').textContent='0';
+  const deck = [...symbols, ...symbols].sort(()=>Math.random()-.5);
+  deck.forEach(sym=>{
+    const c = document.createElement('div');
+    c.className = 'mem-card';
+    c.dataset.sym = sym;
+    c.innerHTML = `<div class="mem-inner"><div class="mem-front"></div><div class="mem-back">${sym}</div></div>`;
+    c.addEventListener('click', ()=>flip(c));
+    board.appendChild(c);
+  });
+}
+function flip(c){
+  if(lock || c.classList.contains('flipped') || c.classList.contains('matched')) return;
+  c.classList.add('flipped');
+  if(!first){ first = c; return; }
+  moves++; document.getElementById('moves').textContent = moves;
+  if(first.dataset.sym === c.dataset.sym){
+    first.classList.add('matched'); c.classList.add('matched');
+    first=null; pairs++;
+    document.getElementById('pairs').textContent = pairs;
+    burstHearts(window.innerWidth/2, window.innerHeight/2, 10);
+    if(pairs===8){
+      setTimeout(()=>openModal('🏆','You won my heart (again)!',`Solved in ${moves} moves. But honestly? You won it the day I met you.`), 600);
+    }
+  } else {
+    lock = true;
+    setTimeout(()=>{ first.classList.remove('flipped'); c.classList.remove('flipped'); first=null; lock=false; }, 800);
+  }
+}
+initGame();
+
+/* Scratch card */
+const canvas = document.getElementById('scratchCanvas');
+const ctx = canvas.getContext('2d');
+function sizeCanvas(){
+  const r = canvas.getBoundingClientRect();
+  canvas.width = r.width; canvas.height = r.height;
+  const g = ctx.createLinearGradient(0,0,r.width,r.height);
+  g.addColorStop(0,'#8b1e3f'); g.addColorStop(.5,'#ff6f91'); g.addColorStop(1,'#d4a373');
+  ctx.fillStyle = g; ctx.fillRect(0,0,r.width,r.height);
+  ctx.fillStyle = '#fff7f3';
+  ctx.font = `${Math.max(20, r.width*0.05)}px "Dancing Script", cursive`;
+  ctx.textAlign='center';
+  ctx.fillText('✨ Scratch me ✨', r.width/2, r.height/2 - 10);
+  ctx.font = `${Math.max(14, r.width*0.025)}px Poppins, sans-serif`;
+  ctx.fillText('a sweet surprise is hiding', r.width/2, r.height/2 + 25);
+}
+sizeCanvas();
+window.addEventListener('resize', sizeCanvas);
+
+let drawing=false, scratched=0, revealed=false;
+function pos(e){
+  const r = canvas.getBoundingClientRect();
+  const t = e.touches ? e.touches[0] : e;
+  return { x: t.clientX - r.left, y: t.clientY - r.top };
+}
+function scratch(e){
+  if(!drawing) return;
+  const p = pos(e);
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.beginPath();
+  ctx.arc(p.x, p.y, 28, 0, Math.PI*2);
+  ctx.fill();
+  scratched++;
+  if(scratched > 60 && !revealed){
+    revealed = true;
+    canvas.style.transition = 'opacity 1s';
+    canvas.style.opacity = '0';
+    setTimeout(()=>{ burstHearts(window.innerWidth/2, window.innerHeight/2, 30); openModal('🎁','Surprise unlocked!','One free hug + a kiss + a dance in the kitchen. Redeem anytime. 💖'); }, 600);
+  }
+}
+canvas.addEventListener('mousedown',e=>{drawing=true; scratch(e);});
+canvas.addEventListener('mousemove',scratch);
+canvas.addEventListener('mouseup',()=>drawing=false);
+canvas.addEventListener('mouseleave',()=>drawing=false);
+canvas.addEventListener('touchstart',e=>{drawing=true; scratch(e); e.preventDefault();},{passive:false});
+canvas.addEventListener('touchmove',e=>{scratch(e); e.preventDefault();},{passive:false});
+canvas.addEventListener('touchend',()=>drawing=false);
+
+/* Love meter */
+let taps = 0;
+const loveLines = [
+  "Tap the heart...", "Aww, a little ❤️", "Getting warmer 💕",
+  "So much love 💗", "Overflowing 🌹", "Infinite, baby 💖✨",
+  "Okay you broke the meter 🥹💞"
+];
+function loveTap(){
+  taps++;
+  const pct = Math.min(100, taps*15);
+  document.getElementById('loveBar').style.width = pct + '%';
+  document.getElementById('loveText').textContent = loveLines[Math.min(taps, loveLines.length-1)];
+  burstHearts(window.innerWidth/2, window.innerHeight*.6, 6);
+  if(taps===7) openModal('💞','Truly infinite','That meter? It was always going to overflow. There is no number big enough for how I love you.');
+}
+</script>
 </body>
 </html>
